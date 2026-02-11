@@ -6,15 +6,20 @@
   <title>Blog | Technical Writeups by Khaled Anter</title>
   <meta name="description" content="Technical security writeups by Khaled Anter: methodology, vulnerability analysis, and research notes in offensive security and bug bounty." />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="main.js" defer></script>
+  <script src="js/posts-loader.js" defer></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <span class="brand-mark">0xKA</span>
         <span class="brand-name">Khaled Anter</span>
       </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
       <nav class="site-nav">
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
@@ -34,7 +39,7 @@
           <p class="eyebrow">Technical Authority</p>
           <h1>Security Writeups</h1>
           <p class="hero-subtitle">
-            This section is reserved for detailed, technical writeups — not beginner tutorials.
+            This section is reserved for detailed, technical writeups, not beginner tutorials.
           </p>
           <p class="hero-meta">
             Expect methodology, vulnerability behavior, edge cases, and research notes. Each
@@ -46,22 +51,13 @@
 
     <section class="section">
       <div class="container">
-        <div class="card card-muted">
-          <div class="card-label">Writeups Coming Soon</div>
-          <h2>Initial State</h2>
-          <p>
-            The blog is intentionally empty of generic content. Upcoming posts will be:
-          </p>
-          <ul class="roadmap-list">
-            <li>Practical testing methodologies used on real applications.</li>
-            <li>Deep dives into specific vulnerability classes and logic flaws.</li>
-            <li>Post-assessment notes: what worked, what failed, and what changed.</li>
-            <li>Research notes from experiments, labs, and CTFs that revealed new patterns.</li>
-          </ul>
-          <p>
-            Once published, each writeup will focus on reasoning and process, not just payloads.
-          </p>
-        </div>
+        <div id="posts-list" class="card-grid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="post-viewer" class="content blog-article"></div>
       </div>
     </section>
   </main>
