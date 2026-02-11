@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: KhaledAnter4/khaledanter4.github.io
+  name: git-gateway
   branch: main
 
 media_folder: "assets/uploads"
