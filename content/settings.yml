@@ -1,0 +1,17 @@
+name: "Khaled Anter"
+homepage_title: "Offensive Security & Bug Bounty"
+about_text: >
+  Head of Cybersecurity at IEEE Mansoura and senior computer science student,
+  focused on offensive security and structured learning.
+contacts:
+  email: "khaledanter1080@gmail.com"
+  linkedin: "https://www.linkedin.com/in/khaled-anter-0x"
+  github: "https://github.com/KhaledAnter4"
+sections:
+  about: true
+  projects: true
+  blog: true
+  resources: true
+  roadmap: true
+  contact: true
+

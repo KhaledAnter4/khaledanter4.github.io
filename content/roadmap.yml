@@ -1,0 +1,26 @@
+levels:
+  - name: "Foundations"
+    subtitle: "Build Core Understanding"
+    steps:
+      - "Networking basics"
+      - "Linux usage"
+      - "HTTP understanding"
+  - name: "Web Attacker"
+    subtitle: "Think Like an Attacker"
+    steps:
+      - "Request analysis"
+      - "Trust boundaries"
+      - "Client vs server behavior"
+  - name: "Vulnerability Research"
+    subtitle: "Study How Things Break"
+    steps:
+      - "Access control flaws"
+      - "Logic bugs"
+      - "State manipulation"
+  - name: "Bug Hunter"
+    subtitle: "Apply at Scale"
+    steps:
+      - "Target selection"
+      - "Chaining vulnerabilities"
+      - "Impact reporting"
+
