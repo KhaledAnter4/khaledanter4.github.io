@@ -1,114 +1,124 @@
 backend:
-  name: github
-  repo: KhaledAnter4/khaledanter4.github.io
-  branch: main
-  auth_type: implicit
-  app_id: YOUR_GITHUB_OAUTH_APP_ID # replace with your GitHub OAuth App Client ID
+name: git-gateway
+branch: main
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-  - name: "settings"
-    label: "Global Settings"
-    delete: false
-    editor:
-      preview: false
-    files:
-      - file: "content/settings.yml"
-        name: "site_settings"
-        label: "Site Settings"
-        fields:
-          - { name: "name", label: "Name", widget: "string" }
-          - { name: "homepage_title", label: "Homepage Title", widget: "string" }
-          - { name: "about_text", label: "About Page Text", widget: "text" }
-          - label: "Contact Links"
-            name: "contacts"
-            widget: "object"
-            fields:
-              - { name: "email", label: "Email", widget: "string" }
-              - { name: "linkedin", label: "LinkedIn URL", widget: "string" }
-              - { name: "github", label: "GitHub URL", widget: "string" }
-          - label: "Section Visibility"
-            name: "sections"
-            widget: "object"
-            fields:
-              - { name: "about", label: "About", widget: "boolean", default: true }
-              - { name: "projects", label: "Projects", widget: "boolean", default: true }
-              - { name: "blog", label: "Blog", widget: "boolean", default: true }
-              - { name: "resources", label: "Resources", widget: "boolean", default: true }
-              - { name: "roadmap", label: "Roadmap", widget: "boolean", default: true }
-              - { name: "contact", label: "Contact", widget: "boolean", default: true }
 
-  - name: "blog"
-    label: "Blog"
-    folder: "content/blog"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
+* name: "settings"
+  label: "Global Settings"
+  delete: false
+  editor:
+  preview: false
+  files:
+
+  * file: "content/settings.yml"
+    name: "site_settings"
+    label: "Site Settings"
     fields:
-      - { name: "title", label: "Title", widget: "string" }
-      - { name: "date", label: "Date", widget: "datetime" }
-      - { name: "draft", label: "Draft / Hidden", widget: "boolean", default: false }
-      - { name: "categories", label: "Categories", widget: "list", required: false }
-      - { name: "body", label: "Body", widget: "markdown" }
 
-  - name: "projects"
-    label: "Projects"
-    folder: "content/projects"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
+    * { name: "name", label: "Name", widget: "string" }
+    * { name: "homepage_title", label: "Homepage Title", widget: "string" }
+    * { name: "about_text", label: "About Page Text", widget: "text" }
+    * label: "Contact Links"
+      name: "contacts"
+      widget: "object"
+      fields:
+
+      * { name: "email", label: "Email", widget: "string" }
+      * { name: "linkedin", label: "LinkedIn URL", widget: "string" }
+      * { name: "github", label: "GitHub URL", widget: "string" }
+    * label: "Section Visibility"
+      name: "sections"
+      widget: "object"
+      fields:
+
+      * { name: "about", label: "About", widget: "boolean", default: true }
+      * { name: "projects", label: "Projects", widget: "boolean", default: true }
+      * { name: "blog", label: "Blog", widget: "boolean", default: true }
+      * { name: "resources", label: "Resources", widget: "boolean", default: true }
+      * { name: "roadmap", label: "Roadmap", widget: "boolean", default: true }
+      * { name: "contact", label: "Contact", widget: "boolean", default: true }
+
+* name: "blog"
+  label: "Blog"
+  folder: "content/blog"
+  create: true
+  slug: "{{slug}}"
+  extension: "md"
+  fields:
+
+  * { name: "title", label: "Title", widget: "string" }
+  * { name: "date", label: "Date", widget: "datetime" }
+  * { name: "draft", label: "Draft / Hidden", widget: "boolean", default: false }
+  * { name: "categories", label: "Categories", widget: "list", required: false }
+  * { name: "body", label: "Body", widget: "markdown" }
+
+* name: "projects"
+  label: "Projects"
+  folder: "content/projects"
+  create: true
+  slug: "{{slug}}"
+  extension: "md"
+  fields:
+
+  * { name: "title", label: "Title", widget: "string" }
+  * { name: "date", label: "Date", widget: "datetime", required: false }
+  * { name: "featured_image", label: "Featured Image", widget: "image", required: false }
+  * { name: "problem", label: "Problem", widget: "text" }
+  * { name: "approach", label: "Approach", widget: "text" }
+  * { name: "result", label: "Result", widget: "text" }
+  * { name: "lessons", label: "Lessons Learned", widget: "markdown", required: false }
+
+* name: "roadmap"
+  label: "Roadmap"
+  delete: false
+  editor:
+  preview: false
+  files:
+
+  * file: "content/roadmap.yml"
+    name: "roadmap_levels"
+    label: "Roadmap Levels"
     fields:
-      - { name: "title", label: "Title", widget: "string" }
-      - { name: "date", label: "Date", widget: "datetime", required: false }
-      - { name: "featured_image", label: "Featured Image", widget: "image", required: false }
-      - { name: "problem", label: "Problem", widget: "text" }
-      - { name: "approach", label: "Approach", widget: "text" }
-      - { name: "result", label: "Result", widget: "text" }
-      - { name: "lessons", label: "Lessons Learned", widget: "markdown", required: false }
 
-  - name: "roadmap"
-    label: "Roadmap"
-    delete: false
-    editor:
-      preview: false
-    files:
-      - file: "content/roadmap.yml"
-        name: "roadmap_levels"
-        label: "Roadmap Levels"
+    * label: "Levels"
+      name: "levels"
+      widget: "list"
+      fields:
+
+      * { name: "name", label: "Level Name", widget: "string" }
+      * { name: "subtitle", label: "Subtitle", widget: "string", required: false }
+      * label: "Steps"
+        name: "steps"
+        widget: "list"
+        field: { name: "step", label: "Step", widget: "string" }
+      * { name: "image", label: "Image", widget: "image", required: false }
+
+* name: "resources"
+  label: "Resources"
+  delete: false
+  editor:
+  preview: false
+  files:
+
+  * file: "content/resources.yml"
+    name: "resources_content"
+    label: "Resources Content"
+    fields:
+
+    * label: "Categories"
+      name: "categories"
+      widget: "list"
+      fields:
+
+      * { name: "name", label: "Category Name", widget: "string" }
+      * label: "Links"
+        name: "links"
+        widget: "list"
         fields:
-          - label: "Levels"
-            name: "levels"
-            widget: "list"
-            fields:
-              - { name: "name", label: "Level Name", widget: "string" }
-              - { name: "subtitle", label: "Subtitle", widget: "string", required: false }
-              - label: "Steps"
-                name: "steps"
-                widget: "list"
-                field: { name: "step", label: "Step", widget: "string" }
-              - { name: "image", label: "Image", widget: "image", required: false }
 
-  - name: "resources"
-    label: "Resources"
-    delete: false
-    editor:
-      preview: false
-    files:
-      - file: "content/resources.yml"
-        name: "resources_content"
-        label: "Resources Content"
-        fields:
-          - label: "Categories"
-            name: "categories"
-            widget: "list"
-            fields:
-              - { name: "name", label: "Category Name", widget: "string" }
-              - label: "Links"
-                name: "links"
-                widget: "list"
-                fields:
-                  - { name: "label", label: "Label", widget: "string" }
-                  - { name: "url", label: "URL", widget: "string" }
-
+        * { name: "label", label: "Label", widget: "string" }
+        * { name: "url", label: "URL", widget: "string" }
