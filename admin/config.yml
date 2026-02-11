@@ -19,42 +19,31 @@ collections:
     label: "Site Settings"
     fields:
 
-    * { name: "name", label: "Name", widget: "string" }
-    * { name: "homepage_title", label: "Homepage Title", widget: "string" }
-    * { name: "about_text", label: "About Page Text", widget: "text" }
+    * { label: "Name", name: "name", widget: "string" }
+    * { label: "Homepage Title", name: "homepage_title", widget: "string" }
+    * { label: "About Text", name: "about_text", widget: "text" }
     * label: "Contact Links"
       name: "contacts"
       widget: "object"
       fields:
 
-      * { name: "email", label: "Email", widget: "string" }
-      * { name: "linkedin", label: "LinkedIn URL", widget: "string" }
-      * { name: "github", label: "GitHub URL", widget: "string" }
-    * label: "Section Visibility"
-      name: "sections"
-      widget: "object"
-      fields:
-
-      * { name: "about", label: "About", widget: "boolean", default: true }
-      * { name: "projects", label: "Projects", widget: "boolean", default: true }
-      * { name: "blog", label: "Blog", widget: "boolean", default: true }
-      * { name: "resources", label: "Resources", widget: "boolean", default: true }
-      * { name: "roadmap", label: "Roadmap", widget: "boolean", default: true }
-      * { name: "contact", label: "Contact", widget: "boolean", default: true }
+      * { label: "Email", name: "email", widget: "string" }
+      * { label: "LinkedIn", name: "linkedin", widget: "string" }
+      * { label: "GitHub", name: "github", widget: "string" }
 
 * name: "blog"
-  label: "Blog"
+  label: "Blog Posts"
   folder: "content/blog"
   create: true
   slug: "{{slug}}"
   extension: "md"
   fields:
 
-  * { name: "title", label: "Title", widget: "string" }
-  * { name: "date", label: "Date", widget: "datetime" }
-  * { name: "draft", label: "Draft / Hidden", widget: "boolean", default: false }
-  * { name: "categories", label: "Categories", widget: "list", required: false }
-  * { name: "body", label: "Body", widget: "markdown" }
+  * { label: "Title", name: "title", widget: "string" }
+  * { label: "Date", name: "date", widget: "datetime" }
+  * { label: "Draft", name: "draft", widget: "boolean", default: false }
+  * { label: "Categories", name: "categories", widget: "list", required: false }
+  * { label: "Body", name: "body", widget: "markdown" }
 
 * name: "projects"
   label: "Projects"
@@ -64,13 +53,13 @@ collections:
   extension: "md"
   fields:
 
-  * { name: "title", label: "Title", widget: "string" }
-  * { name: "date", label: "Date", widget: "datetime", required: false }
-  * { name: "featured_image", label: "Featured Image", widget: "image", required: false }
-  * { name: "problem", label: "Problem", widget: "text" }
-  * { name: "approach", label: "Approach", widget: "text" }
-  * { name: "result", label: "Result", widget: "text" }
-  * { name: "lessons", label: "Lessons Learned", widget: "markdown", required: false }
+  * { label: "Title", name: "title", widget: "string" }
+  * { label: "Date", name: "date", widget: "datetime", required: false }
+  * { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+  * { label: "Problem", name: "problem", widget: "text" }
+  * { label: "Approach", name: "approach", widget: "text" }
+  * { label: "Result", name: "result", widget: "text" }
+  * { label: "Lessons", name: "lessons", widget: "markdown", required: false }
 
 * name: "roadmap"
   label: "Roadmap"
@@ -89,13 +78,13 @@ collections:
       widget: "list"
       fields:
 
-      * { name: "name", label: "Level Name", widget: "string" }
-      * { name: "subtitle", label: "Subtitle", widget: "string", required: false }
+      * { label: "Level Name", name: "name", widget: "string" }
+      * { label: "Subtitle", name: "subtitle", widget: "string", required: false }
       * label: "Steps"
         name: "steps"
         widget: "list"
-        field: { name: "step", label: "Step", widget: "string" }
-      * { name: "image", label: "Image", widget: "image", required: false }
+        field: { label: "Step", name: "step", widget: "string" }
+      * { label: "Image", name: "image", widget: "image", required: false }
 
 * name: "resources"
   label: "Resources"
@@ -114,11 +103,11 @@ collections:
       widget: "list"
       fields:
 
-      * { name: "name", label: "Category Name", widget: "string" }
+      * { label: "Category Name", name: "name", widget: "string" }
       * label: "Links"
         name: "links"
         widget: "list"
         fields:
 
-        * { name: "label", label: "Label", widget: "string" }
-        * { name: "url", label: "URL", widget: "string" }
+        * { label: "Label", name: "label", widget: "string" }
+        * { label: "URL", name: "url", widget: "string" }
