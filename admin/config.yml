@@ -1,113 +1,101 @@
 backend:
-name: git-gateway
-branch: main
+  name: github
+  repo: KhaledAnter4/khaledanter4.github.io
+  branch: main
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-
-* name: "settings"
-  label: "Global Settings"
-  delete: false
-  editor:
-  preview: false
-  files:
-
-  * file: "content/settings.yml"
-    name: "site_settings"
-    label: "Site Settings"
-    fields:
-
-    * { label: "Name", name: "name", widget: "string" }
-    * { label: "Homepage Title", name: "homepage_title", widget: "string" }
-    * { label: "About Text", name: "about_text", widget: "text" }
-    * label: "Contact Links"
-      name: "contacts"
-      widget: "object"
-      fields:
-
-      * { label: "Email", name: "email", widget: "string" }
-      * { label: "LinkedIn", name: "linkedin", widget: "string" }
-      * { label: "GitHub", name: "github", widget: "string" }
-
-* name: "blog"
-  label: "Blog Posts"
-  folder: "content/blog"
-  create: true
-  slug: "{{slug}}"
-  extension: "md"
-  fields:
-
-  * { label: "Title", name: "title", widget: "string" }
-  * { label: "Date", name: "date", widget: "datetime" }
-  * { label: "Draft", name: "draft", widget: "boolean", default: false }
-  * { label: "Categories", name: "categories", widget: "list", required: false }
-  * { label: "Body", name: "body", widget: "markdown" }
-
-* name: "projects"
-  label: "Projects"
-  folder: "content/projects"
-  create: true
-  slug: "{{slug}}"
-  extension: "md"
-  fields:
-
-  * { label: "Title", name: "title", widget: "string" }
-  * { label: "Date", name: "date", widget: "datetime", required: false }
-  * { label: "Featured Image", name: "featured_image", widget: "image", required: false }
-  * { label: "Problem", name: "problem", widget: "text" }
-  * { label: "Approach", name: "approach", widget: "text" }
-  * { label: "Result", name: "result", widget: "text" }
-  * { label: "Lessons", name: "lessons", widget: "markdown", required: false }
-
-* name: "roadmap"
-  label: "Roadmap"
-  delete: false
-  editor:
-  preview: false
-  files:
-
-  * file: "content/roadmap.yml"
-    name: "roadmap_levels"
-    label: "Roadmap Levels"
-    fields:
-
-    * label: "Levels"
-      name: "levels"
-      widget: "list"
-      fields:
-
-      * { label: "Level Name", name: "name", widget: "string" }
-      * { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-      * label: "Steps"
-        name: "steps"
-        widget: "list"
-        field: { label: "Step", name: "step", widget: "string" }
-      * { label: "Image", name: "image", widget: "image", required: false }
-
-* name: "resources"
-  label: "Resources"
-  delete: false
-  editor:
-  preview: false
-  files:
-
-  * file: "content/resources.yml"
-    name: "resources_content"
-    label: "Resources Content"
-    fields:
-
-    * label: "Categories"
-      name: "categories"
-      widget: "list"
-      fields:
-
-      * { label: "Category Name", name: "name", widget: "string" }
-      * label: "Links"
-        name: "links"
-        widget: "list"
+  - name: "settings"
+    label: "Global Settings"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "content/settings.yml"
+        name: "site_settings"
+        label: "Site Settings"
         fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Homepage Title", name: "homepage_title", widget: "string" }
+          - { label: "About Text", name: "about_text", widget: "text" }
+          - label: "Contact Links"
+            name: "contacts"
+            widget: "object"
+            fields:
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "LinkedIn", name: "linkedin", widget: "string" }
+              - { label: "GitHub", name: "github", widget: "string" }
 
-        * { label: "Label", name: "label", widget: "string" }
-        * { label: "URL", name: "url", widget: "string" }
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Problem", name: "problem", widget: "text" }
+      - { label: "Approach", name: "approach", widget: "text" }
+      - { label: "Result", name: "result", widget: "text" }
+      - { label: "Lessons", name: "lessons", widget: "markdown", required: false }
+
+  - name: "roadmap"
+    label: "Roadmap"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "content/roadmap.yml"
+        name: "roadmap_levels"
+        label: "Roadmap Levels"
+        fields:
+          - label: "Levels"
+            name: "levels"
+            widget: "list"
+            fields:
+              - { label: "Level Name", name: "name", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                field: { label: "Step", name: "step", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "resources"
+    label: "Resources"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "content/resources.yml"
+        name: "resources_content"
+        label: "Resources Content"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - { label: "Category Name", name: "name", widget: "string" }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
