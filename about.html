@@ -4,99 +4,176 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About | Khaled Anter</title>
-  <meta name="description" content="Technical identity of Khaled Anter – offensive security, penetration testing, and cybersecurity leadership at IEEE Mansoura." />
+  <meta name="description" content="About Khaled Anter — Software Tester with bug hunting and web penetration testing background." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About | Khaled Anter" />
+  <meta property="og:description" content="Software Tester · Web Penetration Tester" />
+  <meta property="og:url" content="https://khaledanter4.github.io/about.html" />
+  <link rel="canonical" href="https://khaledanter4.github.io/about.html" />
   <link rel="stylesheet" href="style.css" />
   <script src="main.js" defer></script>
 </head>
-<body>
+<body data-page="about">
   <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-name">Khaled Anter</span>
-      </a>
-      <button class="nav-toggle" type="button" aria-label="Toggle navigation">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-      <nav class="site-nav">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html" aria-label="Khaled Anter home">Khaled Anter</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link nav-link--active">About</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="resources.html" class="nav-link">Resources</a>
-        <a href="roadmap.html" class="nav-link">Roadmap</a>
-        <a href="contact.html" class="nav-link nav-link--accent">Contact</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="writing.html" class="nav-link">Writing</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
+      <div class="site-header__controls">
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
+          <span class="theme-toggle__sun" aria-hidden="true">☀</span>
+          <span class="theme-toggle__moon" aria-hidden="true">☾</span>
+        </button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="page-main">
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Technical Identity</p>
-          <h1>About Khaled Anter</h1>
-          <p class="hero-subtitle">
-            Head of Cybersecurity at IEEE Mansoura and senior computer science student,
-            focused on offensive security.
-          </p>
+  <main id="main">
+    <section class="page-head">
+      <div class="container page-head__layout">
+        <div>
+          <h1>Software Tester with a bug hunting mindset</h1>
+        </div>
+        <div>
+          <p class="page-head__summary">My current direction is software testing, especially manual testing and automation testing, with web penetration testing as a strong secondary background.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container">
-        <div class="content">
-          <div class="section">
-            <h2>Profile</h2>
-            <p>
-              Computer Science undergraduate (Expected 2026) specializing in web application and
-              network vulnerability assessment.
-            </p>
-            <p>
-              Proficient in Linux and Windows systems, with a strong focus on secure coding
-              practices. Committed to continuous technical growth and staying current with
-              evolving security standards.
-            </p>
+      <div class="container split-section">
+        <div class="section-lead">
+          <h2>Skills</h2>
+        </div>
+        <div class="editorial-rows">
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">Software Testing</strong>
+            <p class="editorial-row__desc">Manual Testing, Functional Testing, Regression Testing, Smoke &amp; Sanity Testing, Exploratory Testing, Test Case Design &amp; Execution, Bug Reporting, Positive &amp; Negative Testing</p>
           </div>
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">Web &amp; Mobile Testing</strong>
+            <p class="editorial-row__desc">Web Application Testing, Mobile Application Testing, UI Testing, User Workflow Testing, Input Validation, Authentication &amp; Authorization Testing</p>
+          </div>
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">API Testing</strong>
+            <p class="editorial-row__desc">REST API Testing, Postman, HTTP Methods &amp; Status Codes, Request/Response Validation</p>
+          </div>
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">Test Management &amp; Tools</strong>
+            <p class="editorial-row__desc">Jira, Trello, Zephyr, Postman, Browser DevTools, Git, Linux</p>
+          </div>
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">Technical &amp; Security</strong>
+            <p class="editorial-row__desc">Web &amp; API Security Testing, OWASP Top 10, Authentication &amp; Authorization Testing, Business Logic Vulnerabilities, Burp Suite, Nmap, Wireshark, Metasploit, TCP/IP, HTTP/HTTPS</p>
+          </div>
+          <div class="editorial-row reveal">
+            <strong class="editorial-row__title">Development</strong>
+            <p class="editorial-row__desc">HTML, JavaScript, PHP, Laravel, Node.js</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="section">
-            <h2>Certifications</h2>
-            <ul>
-              <li><strong>Front End Challenger</strong>, Egypt FWD</li>
-              <li><strong>CompTIA Security+</strong> (Self-Learning)</li>
-              <li><strong>Jr Penetration Tester</strong>, TryHackMe</li>
-              <li><strong>Certified Associate Penetration Tester (CAPT)</strong>, Hackviser</li>
-              <li><strong>Tech Support Development</strong>, Google</li>
-              <li><strong>Penetration Tester</strong>, Digital Egypt Pioneers Initiative (DEPI)</li>
-              <li><strong>Cybersecurity for Beginners</strong>, Mahara Tech</li>
-              <li>(Network Security, Python, Red Hat SysAdmin, Ethical Hacking courses)</li>
-              <li><strong>Certified Web Security Expert (CWSE)</strong>, Hackviser (content completed)</li>
+    <section class="section">
+      <div class="container split-section">
+        <div class="section-lead">
+          <h2>Development</h2>
+        </div>
+        <div>
+          <p class="section-copy">I’ve learned programming and worked with technologies such as JavaScript, PHP, Laravel, Node.js, HTML, and REST APIs. Most of my development work has been project-based, with AI-assisted coding being part of my workflow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split-section">
+        <div class="section-lead">
+          <h2>Certifications</h2>
+        </div>
+        <div class="cert-list">
+          <div class="cert-item reveal">
+            <span class="cert-name">eLearnSecurity Junior Penetration Tester (eJPTv2)</span>
+            <span class="cert-issuer">INE</span>
+          </div>
+          <div class="cert-item reveal">
+            <span class="cert-name">Certified Associate Penetration Tester (CAPT)</span>
+            <span class="cert-issuer">Hackviser</span>
+          </div>
+          <div class="cert-item reveal">
+            <span class="cert-name">Certified Web Security Expert (CWSE)</span>
+            <span class="cert-issuer">Hackviser</span>
+          </div>
+          <div class="cert-item reveal">
+            <span class="cert-name">Certified Web Security Expert (CWSE)</span>
+            <span class="cert-issuer">Hack The Box</span>
+          </div>
+          <div class="cert-item reveal">
+            <span class="cert-name">Penetration Tester</span>
+            <span class="cert-issuer">Digital Egypt Pioneers Initiative (DEPI)</span>
+          </div>
+          <div class="cert-item reveal">
+            <span class="cert-name">Jr Penetration Tester</span>
+            <span class="cert-issuer">TryHackMe</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split-section">
+        <div class="section-lead">
+          <h2>Courses</h2>
+        </div>
+        <div class="courses-grid">
+          <div class="course-group reveal">
+            <h3>Software Testing</h3>
+            <ul class="clean-list">
+              <li>Introduction to Software Testing Concepts &amp; Techniques — Mahara-Tech</li>
+              <li>Testing Bootcamp — Nezam Academy</li>
+              <li>ISTQB Fundamentals</li>
             </ul>
           </div>
+          <div class="course-group reveal">
+            <h3>Security</h3>
+            <ul class="clean-list">
+              <li>Cybersecurity for Beginners — Mahara Tech</li>
+              <li>CompTIA Security+ — Self-Study</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- <div class="section">
-            <h2>Training</h2>
-            <p>
-              <strong>CWSE Course</strong>, Hackviser (training completed)
-            </p>
-            <p>
-              Training and labs are used to refine methodology, validate assumptions,
-              and practice disciplined note-taking instead of collecting course badges. -->
-            </p>
+    <section class="section">
+      <div class="container split-section">
+        <div class="section-lead">
+          <h2>Background</h2>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-item reveal">
+            <div class="timeline-role">Cybersecurity Committee Member &amp; Head</div>
+            <div class="timeline-meta">IEEE — Mansoura University</div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-role">Cybersecurity Committee Member</div>
+            <div class="timeline-meta">CAT Reloaded — Mansoura University</div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-role">ICPC Participation</div>
+            <div class="timeline-meta">ACPC — MET Academy</div>
           </div>
         </div>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-primary">
-        Representing cybersecurity leadership at IEEE Mansoura through practical work.
-      </p>
-    </div>
-  </footer>
 </body>
 </html>
-
