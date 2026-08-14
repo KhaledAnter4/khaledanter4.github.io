@@ -685,11 +685,11 @@ h4 {
   color: var(--accent-secondary);
 }
 
-/* Clean Structured Contact 3-Column Card Grid */
-.contact-grid {
+/* Asymmetric Domino Bento Collage Contact Layout */
+.contact-bento-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 .contact-tile {
@@ -846,7 +846,7 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   transform: none;
 }
 
-/* Responsive Desktop Layout (100vh Viewport Fit for Contact) */
+/* Responsive Desktop Layout (Bento Spans & 100vh Viewport Fit for Contact) */
 @media (min-width: 981px) {
   body[data-page="contact"] {
     height: 100vh;
@@ -879,6 +879,11 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
     padding-bottom: 1.5rem !important;
     border-top: 1px solid var(--border);
   }
+
+  .bento-span-7 { grid-column: span 7; }
+  .bento-span-5 { grid-column: span 5; }
+  .bento-span-4 { grid-column: span 4; }
+  .bento-span-8 { grid-column: span 8; }
 }
 
 /* Mobile & Tablet Styles */
@@ -929,8 +934,15 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
     gap: 0.35rem;
   }
 
-  .contact-grid {
+  .contact-bento-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bento-span-7,
+  .bento-span-5,
+  .bento-span-4,
+  .bento-span-8 {
+    grid-column: span 2;
   }
 
   .section-lead h2 {
@@ -949,8 +961,15 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
     padding-top: 2rem !important;
   }
 
-  .contact-grid {
+  .contact-bento-grid {
     grid-template-columns: 1fr;
+  }
+
+  .bento-span-7,
+  .bento-span-5,
+  .bento-span-4,
+  .bento-span-8 {
+    grid-column: span 1;
   }
 
   .hero__actions {
