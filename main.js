@@ -30,6 +30,10 @@
   applyTheme(getPreferredTheme());
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (document.body && document.body.getAttribute('data-page')) {
+      root.setAttribute('data-page', document.body.getAttribute('data-page'));
+    }
+
     var header = document.querySelector('.site-header');
     var nav = document.querySelector('.site-nav');
     var navToggle = document.querySelector('.nav-toggle');
@@ -224,4 +228,21 @@
       observer.observe(item);
     });
   });
+
+  // Dynamic Browser Tab Title (Page Visibility API)
+  (function () {
+    var originalTitle = document.title;
+    var hiddenTitle = "I'm watching you 👁️";
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden || document.visibilityState === 'hidden') {
+        if (document.title !== hiddenTitle) {
+          originalTitle = document.title;
+        }
+        document.title = hiddenTitle;
+      } else {
+        document.title = originalTitle;
+      }
+    });
+  })();
 })();

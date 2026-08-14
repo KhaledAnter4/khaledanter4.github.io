@@ -523,6 +523,9 @@ h4 {
   display: grid;
   gap: 0;
   border-top: 1px solid var(--border);
+  overflow: visible;
+  overflow-y: visible;
+  max-height: none;
 }
 
 .editorial-row {
@@ -533,6 +536,14 @@ h4 {
   padding: 1.1rem 0;
   border-bottom: 1px solid var(--border);
   transition: background-color var(--transition-fast);
+  overflow: visible;
+  overflow-y: visible;
+}
+
+.editorial-rows:hover,
+.editorial-row:hover {
+  overflow: visible;
+  overflow-y: visible;
 }
 
 .editorial-row__title {
@@ -846,8 +857,41 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   transform: none;
 }
 
-/* Responsive Desktop Layout (Bento Spans & 100vh Viewport Fit for Contact) */
+/* Responsive Desktop Layout (Bento Spans & 100vh Viewport Fit for Home & Contact) */
 @media (min-width: 981px) {
+  html[data-page="home"],
+  html:has(body[data-page="home"]) {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  body[data-page="home"] {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body[data-page="home"] main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  body[data-page="home"] .hero {
+    padding-top: var(--page-header-pt) !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  body[data-page="home"] .section {
+    padding: 1.15rem 0 !important;
+  }
+
   body[data-page="contact"] {
     height: 100vh;
     max-height: 100vh;
