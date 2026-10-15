@@ -31,9 +31,23 @@
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="site-header__controls">
-        <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
-          <span class="theme-toggle__sun" aria-hidden="true">☀</span>
-          <span class="theme-toggle__moon" aria-hidden="true">☾</span>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle color theme" data-theme-toggle>
+          <!-- Sun icon (visible in light mode) -->
+          <svg class="theme-toggle__icon theme-toggle__sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon icon (visible in dark mode) -->
+          <svg class="theme-toggle__icon theme-toggle__moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
         </button>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
           <span></span>
@@ -43,7 +57,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" class="projects-main">
     <section class="page-head">
       <div class="container page-head__layout">
         <div>
@@ -55,30 +69,33 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section--projects">
       <div class="container">
         <article class="featured-project-card reveal" aria-label="Orynt — Featured Project">
 
-          <!-- Abstract visual: CSS-only security/dev tool motif -->
+          <!-- Orynt logo panel -->
           <div class="featured-project__visual" aria-hidden="true">
-            <div class="fpv__grid"></div>
-            <div class="fpv__ring fpv__ring--1"></div>
-            <div class="fpv__ring fpv__ring--2"></div>
-            <div class="fpv__ring fpv__ring--3"></div>
-            <div class="fpv__dot fpv__dot--1"></div>
-            <div class="fpv__dot fpv__dot--2"></div>
-            <div class="fpv__dot fpv__dot--3"></div>
-            <div class="fpv__line fpv__line--h"></div>
-            <div class="fpv__line fpv__line--v"></div>
-            <div class="fpv__badge">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2 3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2Z"/>
-                <polyline points="9 12 11 14 15 10"/>
-              </svg>
+            <!-- Subtle scanline texture -->
+            <div class="fpv__scanlines"></div>
+            <!-- Corner accents -->
+            <div class="fpv__corner fpv__corner--tl"></div>
+            <div class="fpv__corner fpv__corner--br"></div>
+            <!-- Orynt logo -->
+            <div class="fpv__logo-wrap">
+              <img
+                src="assets/orynt-terminal-white.svg"
+                alt=""
+                class="fpv__logo"
+                width="72"
+                height="72"
+                loading="eager"
+                decoding="async"
+              />
+              <span class="fpv__logo-name">Orynt</span>
             </div>
           </div>
 
-          <!-- Content -->
+          <!-- Content body -->
           <div class="featured-project__body">
             <span class="featured-label">Featured Project</span>
             <h2 class="featured-project__headline">Built Orynt</h2>
@@ -95,7 +112,7 @@
                 aria-label="Visit Orynt live project (opens in new tab)"
               >
                 Visit Live Project
-                <svg class="btn-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg class="btn-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                   <path d="M3 8h10M9 4l4 4-4 4"/>
                 </svg>
               </a>

@@ -111,9 +111,15 @@
 
     // Theme Switcher
     if (themeToggle) {
+      function updateToggleLabel(theme) {
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      }
+      updateToggleLabel(root.getAttribute('data-theme') || 'light');
+
       themeToggle.addEventListener('click', function () {
         var nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyTheme(nextTheme);
+        updateToggleLabel(nextTheme);
         try {
           localStorage.setItem(storageKey, nextTheme);
         } catch (error) {

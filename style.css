@@ -279,10 +279,20 @@ button {
   transform: scale(1.05);
 }
 
-html[data-theme="dark"] .theme-toggle__sun,
-html:not([data-theme="dark"]) .theme-toggle__moon {
-  opacity: 0.4;
+/* SVG icon pair — show one icon at a time */
+.theme-toggle__icon {
+  display: block;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
+
+/* Light mode: show sun, hide moon */
+html:not([data-theme="dark"]) .theme-toggle__sun  { opacity: 1; transform: scale(1) rotate(0deg); }
+html:not([data-theme="dark"]) .theme-toggle__moon { opacity: 0; position: absolute; pointer-events: none; }
+
+/* Dark mode: show moon, hide sun */
+html[data-theme="dark"] .theme-toggle__moon { opacity: 1; transform: scale(1); }
+html[data-theme="dark"] .theme-toggle__sun  { opacity: 0; position: absolute; pointer-events: none; }
 
 .nav-toggle {
   display: none;
@@ -928,6 +938,33 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   .bento-span-5 { grid-column: span 5; }
   .bento-span-4 { grid-column: span 4; }
   .bento-span-8 { grid-column: span 8; }
+
+  /* Projects page — single-screen viewport fit on desktop */
+  body[data-page="projects"] {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body[data-page="projects"] main.projects-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  body[data-page="projects"] .page-head {
+    padding-top: var(--page-header-pt) !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  body[data-page="projects"] .section--projects {
+    padding: 0 0 1.5rem;
+  }
 }
 
 /* Mobile & Tablet Styles */
@@ -1045,178 +1082,178 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
 }
 
 /* =========================================================
-   Featured Project Card — Projects Page
+   Featured Project Card — Projects Page (Orynt)
    ========================================================= */
+
+/* Orynt brand tokens — emerald/near-black */
+:root {
+  --orynt-bg:        #09090b;
+  --orynt-surface:   #111113;
+  --orynt-border:    rgba(255, 255, 255, 0.08);
+  --orynt-green:     #10b981;
+  --orynt-green-dim: rgba(16, 185, 129, 0.12);
+  --orynt-green-glow:rgba(16, 185, 129, 0.18);
+}
 
 .featured-project-card {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 0.85fr 1.15fr;
   gap: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-highlight), var(--glass-shadow);
   overflow: hidden;
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
-  min-height: 340px;
 }
 
 .featured-project-card:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent-primary) 40%, var(--glass-border));
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.3);
   box-shadow:
     var(--glass-highlight),
     var(--glass-shadow-hover),
-    0 0 40px -8px color-mix(in srgb, var(--accent-primary) 22%, transparent);
+    0 0 40px -10px rgba(16, 185, 129, 0.15);
 }
 
-/* === Abstract Visual === */
+/* === Logo Panel === */
 .featured-project__visual {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--accent-primary) 8%, var(--bg-subtle)) 0%,
-    color-mix(in srgb, var(--accent-violet) 10%, var(--bg)) 100%
-  );
-  border-right: 1px solid var(--border);
+  background: var(--orynt-bg);
+  border-right: 1px solid var(--orynt-border);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  /* Subtle radial emerald glow from center */
+  background-image: radial-gradient(
+    ellipse 70% 55% at 50% 55%,
+    var(--orynt-green-dim) 0%,
+    transparent 70%
+  );
 }
 
-/* Subtle dot grid */
-.fpv__grid {
+/* Fine scanline texture overlay */
+.fpv__scanlines {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle, color-mix(in srgb, var(--text) 14%, transparent) 1px, transparent 1px);
-  background-size: 28px 28px;
-  opacity: 0.45;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.013) 3px,
+    rgba(255, 255, 255, 0.013) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Concentric scanning rings */
-.fpv__ring {
+/* Corner bracket accents */
+.fpv__corner {
   position: absolute;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: ringPulse 3.6s ease-in-out infinite;
+  width: 18px;
+  height: 18px;
+  opacity: 0.35;
 }
-.fpv__ring--1 { width: 80px;  height: 80px;  animation-delay: 0s;    border-color: color-mix(in srgb, var(--accent-primary) 55%, transparent); }
-.fpv__ring--2 { width: 140px; height: 140px; animation-delay: 0.6s;  border-color: color-mix(in srgb, var(--accent-primary) 35%, transparent); }
-.fpv__ring--3 { width: 210px; height: 210px; animation-delay: 1.2s;  border-color: color-mix(in srgb, var(--accent-violet) 25%, transparent); }
-
-@keyframes ringPulse {
-  0%   { opacity: 0.5; transform: translate(-50%, -50%) scale(0.96); }
-  50%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.02); }
-  100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.96); }
+.fpv__corner--tl {
+  top: 14px; left: 14px;
+  border-top: 1.5px solid var(--orynt-green);
+  border-left: 1.5px solid var(--orynt-green);
+}
+.fpv__corner--br {
+  bottom: 14px; right: 14px;
+  border-bottom: 1.5px solid var(--orynt-green);
+  border-right: 1.5px solid var(--orynt-green);
 }
 
-/* Floating data nodes */
-.fpv__dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent-cyan) 60%, transparent);
-  animation: dotFloat 4s ease-in-out infinite;
-}
-.fpv__dot--1 { top: 28%; left: 22%; animation-delay: 0s;   background: var(--accent-cyan); }
-.fpv__dot--2 { top: 62%; left: 72%; animation-delay: 1.4s; background: var(--accent-violet); box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent-violet) 60%, transparent); }
-.fpv__dot--3 { top: 75%; left: 30%; animation-delay: 2.8s; background: var(--accent-primary); box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent-primary) 60%, transparent); }
-
-@keyframes dotFloat {
-  0%, 100% { transform: translateY(0);    opacity: 0.8; }
-  50%       { transform: translateY(-6px); opacity: 1;   }
-}
-
-/* Crosshair lines */
-.fpv__line {
-  position: absolute;
-  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
-}
-.fpv__line--h {
-  top: 50%; left: 0; right: 0;
-  height: 1px;
-  transform: translateY(-50%);
-}
-.fpv__line--v {
-  left: 50%; top: 0; bottom: 0;
-  width: 1px;
-  transform: translateX(-50%);
-}
-
-/* Central shield badge */
-.fpv__badge {
+/* Logo + wordmark group */
+.fpv__logo-wrap {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--accent-primary) 14%, var(--glass-bg));
-  border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
-  box-shadow:
-    0 0 0 6px color-mix(in srgb, var(--accent-primary) 8%, transparent),
-    var(--glass-highlight);
-  color: var(--accent-primary);
-  backdrop-filter: blur(8px);
+  gap: 0.85rem;
 }
 
-/* === Body / Content === */
+.fpv__logo {
+  width: 72px;
+  height: 72px;
+  display: block;
+  flex-shrink: 0;
+  /* Preserve the SVG's own near-black background; add a subtle ring */
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.07),
+    0 0 24px -4px rgba(16, 185, 129, 0.22);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.featured-project-card:hover .fpv__logo {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.1),
+    0 0 36px -4px rgba(16, 185, 129, 0.38);
+  transform: scale(1.04);
+}
+
+.fpv__logo-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orynt-green);
+  opacity: 0.7;
+}
+
+/* === Content Body === */
 .featured-project__body {
-  padding: 2.5rem 2.25rem;
+  padding: 2.25rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0;
+  background: var(--glass-bg);
 }
 
 .featured-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
+  gap: 0.45rem;
+  font-size: 0.73rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent-primary);
-  margin-bottom: 0.85rem;
+  color: var(--orynt-green);
+  margin-bottom: 0.9rem;
 }
 
 .featured-label::before {
   content: "";
   display: block;
-  width: 18px;
-  height: 2px;
+  width: 16px;
+  height: 1.5px;
   border-radius: 2px;
   background: currentColor;
   flex-shrink: 0;
+  opacity: 0.7;
 }
 
 .featured-project__headline {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.55rem, 2.8vw, 2.1rem);
   font-weight: 750;
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 1rem;
+  margin: 0 0 0.9rem;
 }
 
 .featured-project__desc {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  max-width: 34rem;
+  line-height: 1.72;
+  margin: 0 0 1.75rem;
+  max-width: 32rem;
 }
 
 .featured-project__actions {
@@ -1225,24 +1262,26 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   gap: 0.85rem;
 }
 
+/* Emerald CTA — distinct from portfolio's blue accent */
 .featured-project__cta-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--accent-primary);
-  color: #fff;
+  background: var(--orynt-green);
+  color: #000;
   border-radius: var(--radius-full);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  box-shadow: 0 4px 18px color-mix(in srgb, var(--accent-primary) 38%, transparent);
+  padding: 0.7rem 1.4rem;
+  font-size: 0.93rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.28);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 .featured-project__cta-primary:hover {
   transform: translateY(-2px);
-  background: var(--accent-secondary);
-  box-shadow: 0 6px 24px color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+  background: #34d399;
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.42);
 }
 
 .btn-arrow {
@@ -1254,24 +1293,25 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   transform: translateX(3px);
 }
 
-/* Responsive — tablet */
+/* === Responsive — tablet === */
 @media (max-width: 860px) {
   .featured-project-card {
     grid-template-columns: 1fr;
   }
 
   .featured-project__visual {
-    min-height: 200px;
+    min-height: 180px;
+    padding: 2rem 1.5rem;
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--orynt-border);
   }
 
   .featured-project__body {
-    padding: 2rem 1.75rem;
+    padding: 1.75rem 1.5rem;
   }
 }
 
-/* Responsive — mobile */
+/* === Responsive — mobile === */
 @media (max-width: 640px) {
   .featured-project__body {
     padding: 1.5rem 1.25rem;
@@ -1320,10 +1360,5 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
-  }
-
-  .fpv__ring,
-  .fpv__dot {
-    animation: none !important;
   }
 }
