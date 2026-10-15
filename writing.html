@@ -4,15 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Writing</title>
-  <meta name="description" content="Selected Medium articles by Khaled Anter." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Writing" />
-  <meta property="og:description" content="Selected articles from Medium." />
-  <meta property="og:url" content="https://khaledanter4.github.io/writing.html" />
-  <link rel="canonical" href="https://khaledanter4.github.io/writing.html" />
+  <meta http-equiv="refresh" content="0; url=projects.html" />
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('site-theme');
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        var doc = document.documentElement;
+        doc.setAttribute('data-theme', theme);
+        var bg = theme === 'dark' ? '#080c14' : '#f8fafc';
+        doc.style.backgroundColor = bg;
+        doc.style.colorScheme = theme;
+      } catch (e) {}
+      window.location.replace('projects.html');
+    })();
+  </script>
+  <link rel="canonical" href="https://khaledanter4.github.io/projects.html" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="style.css" />
-  <script src="main.js" defer></script>
 </head>
 <body data-page="writing">
   <header class="site-header">
