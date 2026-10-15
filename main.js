@@ -1,4 +1,6 @@
 (function () {
+  'use strict';
+
   var storageKey = 'site-theme';
   var root = document.documentElement;
   var mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -21,13 +23,21 @@
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     var themeColor = theme === 'dark' ? '#080c14' : '#f8fafc';
-    var metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) {
-      metaTheme.setAttribute('content', themeColor);
+    root.style.backgroundColor = themeColor;
+    root.style.colorScheme = theme;
+
+    var metaThemes = document.querySelectorAll('meta[name="theme-color"]');
+    if (metaThemes.length > 0) {
+      metaThemes.forEach(function (meta) {
+        if (!meta.getAttribute('media')) {
+          meta.setAttribute('content', themeColor);
+        }
+      });
     }
   }
 
-  applyTheme(getPreferredTheme());
+  // Ensure theme state is aligned with root
+  applyTheme(root.getAttribute('data-theme') || getPreferredTheme());
 
   document.addEventListener('DOMContentLoaded', function () {
     if (document.body && document.body.getAttribute('data-page')) {
@@ -42,41 +52,54 @@
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
-    // Smooth Page Exit & Entry Transitions
-    if (!prefersReducedMotion) {
-      document.body.classList.add('page-entering');
+    // Theme Switcher with smooth transition during explicit toggle
+    if (themeToggle) {
+      function updateToggleLabel(theme) {
+        themeToggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+        );
+      }
+      updateToggleLabel(root.getAttribute('data-theme') || 'light');
 
-      window.addEventListener('pageshow', function () {
-        document.body.classList.remove('page-exiting');
-      });
+      themeToggle.addEventListener('click', function () {
+        var currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        var nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-      document.addEventListener('click', function (e) {
-        var anchor = e.target.closest('a[href]');
-        if (!anchor) return;
+        root.classList.add('is-theme-toggling');
+        applyTheme(nextTheme);
+        updateToggleLabel(nextTheme);
 
-        var href = anchor.getAttribute('href');
-        if (
-          !href ||
-          href.startsWith('#') ||
-          href.startsWith('mailto:') ||
-          href.startsWith('tel:') ||
-          anchor.target === '_blank' ||
-          href.startsWith('http://') ||
-          href.startsWith('https://') ||
-          href.endsWith('.pdf')
-        ) {
-          return;
+        try {
+          localStorage.setItem(storageKey, nextTheme);
+        } catch (error) {
+          // noop
         }
 
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-          return;
-        }
-
-        e.preventDefault();
-        document.body.classList.add('page-exiting');
         setTimeout(function () {
-          window.location.href = href;
-        }, 260);
+          root.classList.remove('is-theme-toggling');
+        }, 300);
+      });
+    }
+
+    // System theme preference listener
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', function (event) {
+        var stored = null;
+        try {
+          stored = localStorage.getItem(storageKey);
+        } catch (error) {
+          stored = null;
+        }
+        if (!stored) {
+          applyTheme(event.matches ? 'dark' : 'light');
+          if (themeToggle) {
+            themeToggle.setAttribute(
+              'aria-label',
+              event.matches ? 'Switch to light theme' : 'Switch to dark theme'
+            );
+          }
+        }
       });
     }
 
@@ -85,13 +108,6 @@
       var lastScrollY = window.scrollY || document.documentElement.scrollTop;
       var scrollTicking = false;
       var scrollThreshold = 60;
-
-      window.addEventListener('scroll', function () {
-        if (!scrollTicking) {
-          requestAnimationFrame(updateHeaderScroll);
-          scrollTicking = true;
-        }
-      }, { passive: true });
 
       function updateHeaderScroll() {
         var currentScrollY = window.scrollY || document.documentElement.scrollTop;
@@ -107,39 +123,17 @@
         lastScrollY = Math.max(0, currentScrollY);
         scrollTicking = false;
       }
-    }
 
-    // Theme Switcher
-    if (themeToggle) {
-      function updateToggleLabel(theme) {
-        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-      }
-      updateToggleLabel(root.getAttribute('data-theme') || 'light');
-
-      themeToggle.addEventListener('click', function () {
-        var nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(nextTheme);
-        updateToggleLabel(nextTheme);
-        try {
-          localStorage.setItem(storageKey, nextTheme);
-        } catch (error) {
-          // noop
-        }
-      });
-    }
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', function (event) {
-        var stored = null;
-        try {
-          stored = localStorage.getItem(storageKey);
-        } catch (error) {
-          stored = null;
-        }
-        if (!stored) {
-          applyTheme(event.matches ? 'dark' : 'light');
-        }
-      });
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!scrollTicking) {
+            requestAnimationFrame(updateHeaderScroll);
+            scrollTicking = true;
+          }
+        },
+        { passive: true }
+      );
     }
 
     // Mobile Navigation Toggle
@@ -159,7 +153,7 @@
       });
     }
 
-    // Ambient Mouse Light (Smooth fade on motion, fade out when idle)
+    // Ambient Mouse Light (Hardware accelerated, idles cleanly)
     if (!prefersReducedMotion && !isTouchDevice) {
       var light = document.createElement('div');
       light.className = 'ambient-light';
@@ -169,46 +163,78 @@
       var mouseY = window.innerHeight / 2;
       var currentX = mouseX;
       var currentY = mouseY;
-      var ticking = false;
+      var isTracking = false;
       var fadeTimer = null;
-
-      window.addEventListener('mousemove', function (e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        light.style.opacity = '0.85';
-        clearTimeout(fadeTimer);
-        fadeTimer = setTimeout(function () {
-          light.style.opacity = '0';
-        }, 600);
-
-        if (!ticking) {
-          requestAnimationFrame(updateLight);
-          ticking = true;
-        }
-      });
 
       function updateLight() {
         currentX += (mouseX - currentX) * 0.12;
         currentY += (mouseY - currentY) * 0.12;
-        light.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px) translate(-50%, -50%)';
-        ticking = false;
+
+        light.style.transform = 'translate3d(' + (currentX - 275) + 'px, ' + (currentY - 275) + 'px, 0)';
+
         if (Math.abs(mouseX - currentX) > 0.5 || Math.abs(mouseY - currentY) > 0.5) {
           requestAnimationFrame(updateLight);
-          ticking = true;
+        } else {
+          isTracking = false;
         }
       }
 
-      // Pointer Tracking for Glass Hover Glow
-      var glassElements = document.querySelectorAll('.contact-tile, .project-card, .editorial-card, .cv-card');
+      window.addEventListener(
+        'mousemove',
+        function (e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          light.style.opacity = '0.85';
+          clearTimeout(fadeTimer);
+          fadeTimer = setTimeout(function () {
+            light.style.opacity = '0';
+          }, 600);
+
+          if (!isTracking) {
+            requestAnimationFrame(updateLight);
+            isTracking = true;
+          }
+        },
+        { passive: true }
+      );
+
+      // Pointer Tracking for Glass Hover Glow (Cached getBoundingClientRect to prevent layout reflows)
+      var glassElements = document.querySelectorAll(
+        '.contact-tile, .project-card, .editorial-card, .cv-card, .featured-project-card'
+      );
       glassElements.forEach(function (el) {
-        el.addEventListener('mousemove', function (e) {
-          var rect = el.getBoundingClientRect();
-          var x = e.clientX - rect.left;
-          var y = e.clientY - rect.top;
-          el.style.setProperty('--pointer-x', x + 'px');
-          el.style.setProperty('--pointer-y', y + 'px');
-        });
+        var rect = null;
+
+        el.addEventListener(
+          'mouseenter',
+          function () {
+            rect = el.getBoundingClientRect();
+          },
+          { passive: true }
+        );
+
+        el.addEventListener(
+          'mousemove',
+          function (e) {
+            if (!rect) {
+              rect = el.getBoundingClientRect();
+            }
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            el.style.setProperty('--pointer-x', x + 'px');
+            el.style.setProperty('--pointer-y', y + 'px');
+          },
+          { passive: true }
+        );
+
+        el.addEventListener(
+          'mouseleave',
+          function () {
+            rect = null;
+          },
+          { passive: true }
+        );
       });
     }
 
@@ -220,15 +246,18 @@
       return;
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, {
-      threshold: 0.1
-    });
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.1
+      }
+    );
 
     revealItems.forEach(function (item) {
       observer.observe(item);
