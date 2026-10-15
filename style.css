@@ -79,6 +79,15 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
+  /* Set background on html (not just body) so the browser canvas colour
+     matches the theme before body has rendered. The inline theme-init
+     script also sets html.style.background synchronously, so this acts
+     as a CSS fallback for the light theme (default). */
+  background: var(--bg);
+}
+
+html[data-theme="dark"] {
+  background: #080c14;
 }
 
 body {
@@ -88,31 +97,31 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-normal), color var(--transition-normal);
+  /* No background-color in transition — animating it causes a visible
+     white→dark sweep on every navigation when the theme is dark.
+     Color transitions are still applied for theme-toggle clicks. */
+  transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              color var(--transition-normal);
   overflow-x: hidden;
   position: relative;
 }
 
 body.page-exiting {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
+/* Page starts invisible; JS adds this class on DOMContentLoaded.
+   The inline theme-init script runs sync, so background is already
+   correct before this animation begins — no white flash. */
 body.page-entering {
-  animation: pageEnter 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: pageEnter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 a,
@@ -195,8 +204,9 @@ button {
   height: 100%;
   padding: 0 1.5rem;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* Reduced saturate from 180% — diminishing returns above 150% at 16px blur */
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
   box-shadow: var(--glass-highlight), var(--glass-shadow);
