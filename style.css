@@ -79,49 +79,68 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
-  /* Set background on html (not just body) so the browser canvas colour
-     matches the theme before body has rendered. The inline theme-init
-     script also sets html.style.background synchronously, so this acts
-     as a CSS fallback for the light theme (default). */
-  background: var(--bg);
+  background-color: var(--bg);
+  color-scheme: light;
 }
 
 html[data-theme="dark"] {
-  background: #080c14;
+  background-color: #080c14;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  background-color: #f8fafc;
+  color-scheme: light;
+}
+
+/* Enable native smooth View Transitions in supporting modern browsers */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  /* No background-color in transition — animating it causes a visible
-     white→dark sweep on every navigation when the theme is dark.
-     Color transitions are still applied for theme-toggle clicks. */
-  transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              color var(--transition-normal);
   overflow-x: hidden;
   position: relative;
 }
 
-body.page-exiting {
-  opacity: 0;
-  transform: translateY(-4px);
+/* Subtle, polished content entrance for page navigation without hiding background canvas */
+@media (prefers-reduced-motion: no-preference) {
+  main {
+    animation: mainFadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 }
 
-/* Page starts invisible; JS adds this class on DOMContentLoaded.
-   The inline theme-init script runs sync, so background is already
-   correct before this animation begins — no white flash. */
-body.page-entering {
-  animation: pageEnter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes mainFadeIn {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes pageEnter {
-  from { opacity: 0; transform: translateY(5px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Smooth transition applied ONLY when user explicitly toggles theme */
+html.is-theme-toggling,
+html.is-theme-toggling body,
+html.is-theme-toggling .site-header__inner,
+html.is-theme-toggling .editorial-card,
+html.is-theme-toggling .contact-tile,
+html.is-theme-toggling .project-card,
+html.is-theme-toggling .cv-card,
+html.is-theme-toggling .featured-project-card,
+html.is-theme-toggling .brand,
+html.is-theme-toggling .nav-link {
+  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease, box-shadow 250ms ease !important;
 }
 
 a,
