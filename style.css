@@ -1347,34 +1347,39 @@ body[data-page="projects"] .ambient-light {
   gap: 0.85rem;
 }
 
-/* Orynt Teal CTA — crisp contrast, bold text */
+/* Primary CTA — White and Blue matching portfolio theme */
 .featured-project__cta-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--orynt-accent);
-  color: #04070d;
+  gap: 0.55rem;
+  background: #ffffff;
+  color: #1d4ed8;
+  border: 1px solid rgba(96, 165, 250, 0.35);
   border-radius: var(--radius-full);
-  padding: 0.7rem 1.45rem;
+  padding: 0.72rem 1.45rem;
   font-size: 0.92rem;
   font-weight: 650;
   letter-spacing: -0.01em;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--orynt-accent) 26%, transparent);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.22), 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .featured-project__cta-primary:hover {
   transform: translateY(-2px);
-  background: color-mix(in srgb, var(--orynt-accent) 88%, #ffffff);
-  box-shadow: 0 6px 22px color-mix(in srgb, var(--orynt-accent) 38%, transparent);
+  background: #ffffff;
+  color: #1e40af;
+  border-color: rgba(96, 165, 250, 0.7);
+  box-shadow: 0 6px 26px rgba(59, 130, 246, 0.42), 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.btn-arrow {
+.featured-project__cta-primary .btn-arrow {
+  color: #2563eb;
   flex-shrink: 0;
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
 .featured-project__cta-primary:hover .btn-arrow {
+  color: #1d4ed8;
   transform: translateX(3px);
 }
 
