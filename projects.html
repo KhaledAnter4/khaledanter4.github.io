@@ -87,24 +87,42 @@
     <section class="section section--projects">
       <div class="container project-groups">
 
-        <!-- 1. Development (First section — 2 cards) -->
-        <section class="project-group">
+        <!-- 1. Development (First section — 2 cards, compact size) -->
+        <section class="project-group project-group--dev">
           <h2>Development</h2>
           <div class="project-grid project-grid--two">
             <article class="project-card project-card--orynt reveal">
               <div class="project-card__header">
-                <h3>Orynt</h3>
-                <span class="project-pill">Featured</span>
+                <div class="project-card__title-group">
+                  <img
+                    src="assets/orynt-terminal-white.svg"
+                    alt=""
+                    class="project-card__logo"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                  />
+                  <h3>Orynt</h3>
+                </div>
+                <a
+                  href="https://orynt-five.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-card__inline-link"
+                >
+                  View Project →
+                </a>
               </div>
               <p class="project-note">Security Research Platform</p>
               <p>A security research platform designed to help security researchers organize their work, manage findings, and streamline their research workflow.</p>
-              <p><a href="https://orynt-five.vercel.app/" target="_blank" rel="noopener noreferrer">View Project →</a></p>
             </article>
 
             <article class="project-card reveal">
-              <h3>ReMind — Graduation Project</h3>
+              <div class="project-card__header">
+                <h3>ReMind — Graduation Project</h3>
+              </div>
+              <p class="project-note">Mobile &amp; Web Platform</p>
               <p>Flutter/Laravel graduation project combining mobile workflows with REST API integration and AI-powered functionality.</p>
-              <p><a href="https://github.com/Graduation-Project-ReMind" target="_blank" rel="noopener noreferrer">View Project →</a></p>
             </article>
           </div>
         </section>
