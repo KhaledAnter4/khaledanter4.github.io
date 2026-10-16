@@ -1090,7 +1090,7 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
 }
 
 /* =========================================================
-   Featured Project Card — Projects Page (Orynt)
+   Projects Page — Merged Layout & Luxury Glass Cards
    ========================================================= */
 
 /* Orynt brand & luxury accents */
@@ -1099,8 +1099,6 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
   --orynt-green-deep:   #065f46;
   --orynt-green-vivid:  #059669;
   --orynt-green-glow:   rgba(4, 120, 87, 0.35);
-  --orynt-bg:           #080c12;
-  --orynt-border:       rgba(255, 255, 255, 0.08);
 }
 
 /* Projects page ambient cursor spotlight — pure luxury soft white across the entire page */
@@ -1122,26 +1120,27 @@ html[data-theme="light"] body[data-page="projects"] .ambient-light {
   );
 }
 
-/* Soft ambient white backdrop glow behind featured project card */
+/* Soft ambient white backdrop glow behind projects section */
 .section--projects {
   position: relative;
+  padding-bottom: 4rem;
 }
 
 .section--projects::before {
   content: "";
   position: absolute;
-  top: 36%;
+  top: 25%;
   left: 50%;
-  width: min(880px, 92vw);
-  height: 400px;
+  width: min(1000px, 94vw);
+  height: 500px;
   transform: translate(-50%, -50%);
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.04) 0%,
     transparent 70%
   );
   pointer-events: none;
-  filter: blur(55px);
+  filter: blur(65px);
   z-index: 0;
   opacity: 0.85;
 }
@@ -1149,372 +1148,114 @@ html[data-theme="light"] body[data-page="projects"] .ambient-light {
 html[data-theme="light"] .section--projects::before {
   background: radial-gradient(
     ellipse at center,
-    rgba(15, 23, 42, 0.03) 0%,
+    rgba(15, 23, 42, 0.025) 0%,
     transparent 70%
   );
 }
 
-/* Featured Project Card — Luxury Glassmorphic Architecture */
-.featured-project-card {
+/* Luxury Glass Cards on Projects Page */
+body[data-page="projects"] .project-card {
   position: relative;
-  max-width: 1040px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(240px, 31%) minmax(0, 69%);
-  gap: 0;
   background: var(--glass-bg);
   backdrop-filter: blur(16px) saturate(150%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-highlight), var(--glass-shadow);
-  overflow: hidden;
-  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+  padding: 1.75rem 1.85rem;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth), background-color var(--transition-smooth);
   z-index: 1;
 }
 
+body[data-page="projects"] .project-card h3 {
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+body[data-page="projects"] .project-card p {
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+body[data-page="projects"] .project-card .project-note {
+  font-size: 0.85rem;
+  font-weight: 550;
+  color: var(--text-soft);
+  margin-top: 0.15rem;
+  margin-bottom: 0.65rem;
+}
+
+body[data-page="projects"] .project-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #60a5fa;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-top: 0.25rem;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+body[data-page="projects"] .project-card a:hover {
+  color: #93c5fd;
+  transform: translateX(3px);
+}
+
 /* Card Hover State — Rich Dark Green illumination */
-.featured-project-card:hover {
+body[data-page="projects"] .project-card:hover {
   transform: translateY(-3px);
   border-color: rgba(5, 150, 105, 0.48);
   box-shadow:
     var(--glass-highlight),
     var(--glass-shadow-hover),
-    0 0 36px -4px var(--orynt-green-glow),
-    0 0 75px -12px rgba(6, 95, 70, 0.24);
+    0 10px 32px -6px var(--orynt-green-glow),
+    0 0 55px -12px rgba(6, 95, 70, 0.22);
 }
 
-/* Pointer tracking glow — activates rich dark green only when hovering on card */
-.featured-project__glow {
-  position: absolute;
-  top: var(--pointer-y, 50%);
-  left: var(--pointer-x, 50%);
-  width: 440px;
-  height: 440px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(4, 120, 87, 0.32) 0%,
-    rgba(6, 95, 70, 0.16) 42%,
-    transparent 70%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.featured-project-card:hover .featured-project__glow {
-  opacity: 1;
-}
-
-/* === Left Column — Compact Logo Panel === */
-.featured-project__visual {
-  position: relative;
-  overflow: hidden;
-  background: var(--orynt-bg);
-  border-right: 1px solid var(--orynt-border);
+/* Orynt Featured Card Specific Enhancements */
+.project-card--orynt .project-card__header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2.5rem 1.75rem;
-  min-height: 250px;
-  background-image: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.025) 0%,
-    transparent 70%
-  );
-  transition: background-image 0.4s ease, border-color var(--transition-smooth);
-  z-index: 2;
-}
-
-.featured-project-card:hover .featured-project__visual {
-  background-image: radial-gradient(
-    circle at 50% 50%,
-    rgba(4, 120, 87, 0.24) 0%,
-    transparent 70%
-  );
-  border-right-color: rgba(5, 150, 105, 0.3);
-}
-
-/* Subtle scanlines texture overlay */
-.fpv__scanlines {
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(255, 255, 255, 0.012) 3px,
-    rgba(255, 255, 255, 0.012) 4px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Corner bracket accents — neutral silver in idle, dark green on hover */
-.fpv__corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  opacity: 0.4;
-  border-color: rgba(255, 255, 255, 0.22);
-  pointer-events: none;
-  transition: border-color var(--transition-normal), opacity var(--transition-normal);
-  z-index: 2;
-}
-
-.fpv__corner--tl {
-  top: 14px;
-  left: 14px;
-  border-top-width: 1.5px;
-  border-top-style: solid;
-  border-left-width: 1.5px;
-  border-left-style: solid;
-}
-
-.fpv__corner--br {
-  bottom: 14px;
-  right: 14px;
-  border-bottom-width: 1.5px;
-  border-bottom-style: solid;
-  border-right-width: 1.5px;
-  border-right-style: solid;
-}
-
-.featured-project-card:hover .fpv__corner {
-  border-color: var(--orynt-green-vivid);
-  opacity: 0.85;
-}
-
-/* Logo + wordmark group */
-.fpv__logo-wrap {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
+  margin-bottom: 0.35rem;
 }
 
-.fpv__logo {
-  width: 64px;
-  height: 64px;
-  display: block;
-  flex-shrink: 0;
-  border-radius: 14px;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 16px -4px rgba(255, 255, 255, 0.06);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+.project-card--orynt .project-card__header h3 {
+  margin-bottom: 0;
 }
 
-.featured-project-card:hover .fpv__logo {
-  transform: scale(1.04);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.14),
-    0 0 30px -3px var(--orynt-green-glow);
-}
-
-.fpv__logo-name {
-  font-size: 0.72rem;
-  font-weight: 650;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  opacity: 0.8;
-  transition: color var(--transition-normal), opacity var(--transition-normal);
-}
-
-.featured-project-card:hover .fpv__logo-name {
-  color: #34d399;
-  opacity: 0.95;
-}
-
-/* === Right Column — Project Information (approx. 69% width) === */
-.featured-project__body {
-  position: relative;
-  z-index: 2;
-  padding: 2.25rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Luxury Pill Badge */
-.featured-badge {
+.project-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.32rem 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 0.95rem;
-  width: fit-content;
-  transition: border-color var(--transition-normal), color var(--transition-normal), background-color var(--transition-normal);
+  transition: border-color var(--transition-normal), background-color var(--transition-normal), color var(--transition-normal);
 }
 
-.featured-badge__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
-  transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
-}
-
-.featured-project-card:hover .featured-badge {
+.project-card--orynt:hover .project-pill {
   border-color: rgba(5, 150, 105, 0.45);
-  background-color: rgba(4, 120, 87, 0.12);
+  background-color: rgba(4, 120, 87, 0.15);
   color: #a7f3d0;
 }
 
-.featured-project-card:hover .featured-badge__dot {
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+.project-card--orynt a {
+  color: #34d399 !important;
 }
 
-.featured-project__headline {
-  font-size: clamp(1.55rem, 2.5vw, 2rem);
-  font-weight: 750;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: var(--text);
-  margin: 0 0 0.85rem;
-}
-
-.featured-project__desc {
-  font-size: 0.96rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin: 0 0 1.35rem;
-  max-width: 38rem;
-}
-
-/* Feature tags */
-.featured-project__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-bottom: 1.75rem;
-}
-
-.fp-tag {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.78rem;
-  font-weight: 550;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.32rem 0.8rem;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.01em;
-  transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-}
-
-.featured-project-card:hover .fp-tag {
-  border-color: rgba(5, 150, 105, 0.28);
-  background-color: rgba(4, 120, 87, 0.08);
-  color: #e2e8f0;
-}
-
-.fp-tag:hover {
-  border-color: rgba(5, 150, 105, 0.55) !important;
-  background-color: rgba(4, 120, 87, 0.18) !important;
-  color: #ffffff !important;
-  transform: translateY(-1px);
-}
-
-.featured-project__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-}
-
-/* Primary CTA — White and Blue matching portfolio theme */
-.featured-project__cta-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  background: #ffffff;
-  color: #1d4ed8;
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  border-radius: var(--radius-full);
-  padding: 0.72rem 1.45rem;
-  font-size: 0.92rem;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.22), 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
-}
-
-.featured-project__cta-primary:hover {
-  transform: translateY(-2px);
-  background: #ffffff;
-  color: #1e40af;
-  border-color: rgba(96, 165, 250, 0.7);
-  box-shadow: 0 6px 26px rgba(59, 130, 246, 0.42), 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.featured-project__cta-primary .btn-arrow {
-  color: #2563eb;
-  flex-shrink: 0;
-  transition: transform var(--transition-fast), color var(--transition-fast);
-}
-
-.featured-project__cta-primary:hover .btn-arrow {
-  color: #1d4ed8;
-  transform: translateX(3px);
-}
-
-/* === Responsive — Tablet === */
-@media (max-width: 860px) {
-  .featured-project-card {
-    grid-template-columns: minmax(200px, 32%) 1fr;
-  }
-
-  .featured-project__body {
-    padding: 1.85rem 1.75rem;
-  }
-}
-
-/* === Responsive — Mobile === */
-@media (max-width: 720px) {
-  .featured-project-card {
-    grid-template-columns: 1fr;
-  }
-
-  .featured-project__visual {
-    min-height: 150px;
-    padding: 1.75rem 1.25rem;
-    border-right: none;
-    border-bottom: 1px solid var(--orynt-border);
-  }
-
-  .featured-project__body {
-    padding: 1.6rem 1.35rem;
-  }
-
-  .featured-project__desc {
-    margin-bottom: 1.35rem;
-  }
-
-  .featured-project__actions {
-    flex-direction: column;
-  }
-
-  .featured-project__cta-primary {
-    width: 100%;
-    justify-content: center;
-  }
+.project-card--orynt a:hover {
+  color: #6ee7b7 !important;
 }
 
 /* Reduced Motion */

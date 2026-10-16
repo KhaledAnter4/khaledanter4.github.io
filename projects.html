@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects — Khaled Anter</title>
-  <meta name="description" content="Projects by Khaled Anter — software development and security research." />
+  <meta name="description" content="Projects by Khaled Anter — software development, security research, and testing." />
   <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
   <script>
@@ -24,12 +24,12 @@
   </script>
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Projects — Khaled Anter" />
-  <meta property="og:description" content="A selection of my work in software development and security." />
+  <meta property="og:description" content="Software development, web penetration testing, and security research." />
   <meta property="og:url" content="https://khaledanter4.github.io/projects.html" />
   <meta property="og:site_name" content="Khaled Anter" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Projects — Khaled Anter" />
-  <meta name="twitter:description" content="A selection of my work in software development and security." />
+  <meta name="twitter:description" content="Software development, web penetration testing, and security research." />
   <link rel="canonical" href="https://khaledanter4.github.io/projects.html" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="style.css" />
@@ -42,7 +42,6 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary">
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
-        <a href="work.html" class="nav-link">Work</a>
         <a href="projects.html" class="nav-link nav-link--active">Projects</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
@@ -73,80 +72,89 @@
     </div>
   </header>
 
-  <main id="main" class="projects-main">
+  <main id="main">
     <section class="page-head">
       <div class="container page-head__layout">
         <div>
           <h1>Projects</h1>
         </div>
         <div>
-          <p class="page-head__summary">A selection of my work in software development and security.</p>
+          <p class="page-head__summary">Software development, web penetration testing, and security research.</p>
         </div>
       </div>
     </section>
 
     <section class="section section--projects">
-      <div class="container">
-        <article class="featured-project-card reveal" aria-label="Orynt — Featured Project">
+      <div class="container project-groups">
 
-          <!-- Ambient pointer glow matching Contact page tiles -->
-          <div class="featured-project__glow" aria-hidden="true"></div>
+        <!-- 1. Development (First section — 2 cards) -->
+        <section class="project-group">
+          <h2>Development</h2>
+          <div class="project-grid project-grid--two">
+            <article class="project-card project-card--orynt reveal">
+              <div class="project-card__header">
+                <h3>Orynt</h3>
+                <span class="project-pill">Featured</span>
+              </div>
+              <p class="project-note">Security Research Platform</p>
+              <p>A security research platform designed to help security researchers organize their work, manage findings, and streamline their research workflow.</p>
+              <p><a href="https://orynt-five.vercel.app/" target="_blank" rel="noopener noreferrer">View Project →</a></p>
+            </article>
 
-          <!-- Orynt logo panel -->
-          <div class="featured-project__visual" aria-hidden="true">
-            <!-- Subtle scanline texture -->
-            <div class="fpv__scanlines"></div>
-            <!-- Corner accents -->
-            <div class="fpv__corner fpv__corner--tl"></div>
-            <div class="fpv__corner fpv__corner--br"></div>
-            <!-- Orynt logo -->
-            <div class="fpv__logo-wrap">
-              <img
-                src="assets/orynt-terminal-white.svg"
-                alt=""
-                class="fpv__logo"
-                width="64"
-                height="64"
-                loading="eager"
-                decoding="async"
-              />
-              <span class="fpv__logo-name">Orynt</span>
-            </div>
+            <article class="project-card reveal">
+              <h3>ReMind — Graduation Project</h3>
+              <p>Flutter/Laravel graduation project combining mobile workflows with REST API integration and AI-powered functionality.</p>
+              <p><a href="https://github.com/Graduation-Project-ReMind" target="_blank" rel="noopener noreferrer">View Project →</a></p>
+            </article>
           </div>
+        </section>
 
-          <!-- Content body -->
-          <div class="featured-project__body">
-            <div class="featured-badge">
-              <span class="featured-badge__dot" aria-hidden="true"></span>
-              <span>Featured Project</span>
-            </div>
-            <h2 class="featured-project__headline">Built Orynt</h2>
-            <p class="featured-project__desc">
-              A security research platform designed to help security researchers organize their work, manage findings, and streamline their research workflow.
-            </p>
-            <div class="featured-project__tags">
-              <span class="fp-tag">Evidence Engine</span>
-              <span class="fp-tag">Scope &amp; Target Tracking</span>
-              <span class="fp-tag">Vulnerability Reports</span>
-            </div>
-            <div class="featured-project__actions">
-              <a
-                class="button featured-project__cta-primary"
-                href="https://orynt-five.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                id="orynt-live-link"
-                aria-label="Visit Orynt live project (opens in new tab)"
-              >
-                Visit Live Project
-                <svg class="btn-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
-              </a>
-            </div>
+        <!-- 2. Software Testing -->
+        <section class="project-group">
+          <h2>Software Testing</h2>
+          <div class="project-grid project-grid--two">
+            <article class="project-card reveal">
+              <h3>Shopify</h3>
+              <p class="project-note">Platform: Zephyr</p>
+              <p>Manual testing and test case management for Shopify e-commerce workflows and checkout scenarios.</p>
+            </article>
+
+            <article class="project-card reveal">
+              <h3>Omnicell Pharmacy</h3>
+              <p class="project-note">Platform: Zephyr</p>
+              <p>Test case design and execution for pharmacy management workflows, inventory, and prescription scenarios.</p>
+            </article>
+
+            <article class="project-card reveal">
+              <h3>AgileTravel</h3>
+              <p class="project-note">Platform: Trello</p>
+              <p>Manual testing of travel booking, ticket reservations, appointment scheduling, and user workflows.</p>
+            </article>
+
+            <article class="project-card reveal">
+              <h3>TryHackMe — Web Application Testing</h3>
+              <p class="project-note">Platform: Trello</p>
+              <p>Manual testing of core web application workflows, input validation, authentication, and expected vs actual behavior.</p>
+            </article>
           </div>
+        </section>
 
-        </article>
+        <!-- 3. Cybersecurity -->
+        <section class="project-group">
+          <h2>Cybersecurity</h2>
+          <div class="project-grid project-grid--two">
+            <article class="project-card reveal">
+              <h3>Security Labs — PortSwigger</h3>
+              <p>Hands-on web security labs focused on identifying and exploiting common web application vulnerabilities.</p>
+            </article>
+            <article class="project-card reveal">
+              <h3>DEPI — Web Penetration Testing Assessment</h3>
+              <p class="project-note">HTB Lantern</p>
+              <p>Conducted a web penetration testing assessment using an OWASP-based methodology, covering reconnaissance, scanning, exploitation, and security reporting.</p>
+            </article>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>
