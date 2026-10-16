@@ -509,6 +509,11 @@ h4 {
   gap: 2rem;
 }
 
+.project-group {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
+}
+
 .project-group h2,
 .project-group h3 {
   margin-bottom: 1.1rem;
@@ -1133,7 +1138,7 @@ html[data-theme="light"] body[data-page="projects"] .ambient-light {
   left: 50%;
   width: min(1000px, 94vw);
   height: 500px;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   background: radial-gradient(
     ellipse at center,
     rgba(255, 255, 255, 0.04) 0%,
@@ -1143,6 +1148,8 @@ html[data-theme="light"] body[data-page="projects"] .ambient-light {
   filter: blur(65px);
   z-index: 0;
   opacity: 0.85;
+  will-change: transform;
+  contain: strict;
 }
 
 html[data-theme="light"] .section--projects::before {
@@ -1153,7 +1160,7 @@ html[data-theme="light"] .section--projects::before {
   );
 }
 
-/* Luxury Glass Cards on Projects Page */
+/* Luxury Glass Cards on Projects Page — Hardware Accelerated & Contained */
 body[data-page="projects"] .project-card {
   position: relative;
   background: var(--glass-bg);
@@ -1164,6 +1171,8 @@ body[data-page="projects"] .project-card {
   box-shadow: var(--glass-highlight), var(--glass-shadow);
   padding: 1.75rem 1.85rem;
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth), background-color var(--transition-smooth);
+  will-change: transform;
+  contain: layout style;
   z-index: 1;
 }
 
@@ -1182,11 +1191,18 @@ body[data-page="projects"] .project-card p {
 }
 
 body[data-page="projects"] .project-card .project-note {
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   font-weight: 550;
-  color: var(--text-soft);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   margin-top: 0.15rem;
   margin-bottom: 0.65rem;
+  letter-spacing: 0.01em;
+}
+
+html[data-theme="light"] body[data-page="projects"] .project-card .project-note {
+  color: #334155;
+  text-shadow: none;
 }
 
 body[data-page="projects"] .project-card a {
@@ -1205,15 +1221,34 @@ body[data-page="projects"] .project-card a:hover {
   transform: translateX(3px);
 }
 
-/* Card Hover State — Rich Dark Green illumination */
+/* Default Card Hover State — Elegant Soft White Illumination */
 body[data-page="projects"] .project-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(5, 150, 105, 0.48);
+  border-color: rgba(255, 255, 255, 0.38);
   box-shadow:
     var(--glass-highlight),
     var(--glass-shadow-hover),
-    0 10px 32px -6px var(--orynt-green-glow),
-    0 0 55px -12px rgba(6, 95, 70, 0.22);
+    0 10px 32px -6px rgba(255, 255, 255, 0.12),
+    0 0 45px -10px rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="light"] body[data-page="projects"] .project-card:hover {
+  border-color: rgba(15, 23, 42, 0.25);
+  box-shadow:
+    var(--glass-highlight),
+    var(--glass-shadow-hover),
+    0 10px 32px -6px rgba(15, 23, 42, 0.08);
+}
+
+/* Orynt Hover State — Rich Luxurious Deep Dark Green */
+body[data-page="projects"] .project-card--orynt:hover {
+  transform: translateY(-3px);
+  border-color: rgba(5, 150, 105, 0.55);
+  box-shadow:
+    var(--glass-highlight),
+    var(--glass-shadow-hover),
+    0 10px 34px -6px rgba(4, 120, 87, 0.38),
+    0 0 60px -12px rgba(6, 95, 70, 0.28);
 }
 
 /* Compact Development Cards */
@@ -1261,19 +1296,24 @@ body[data-page="projects"] .project-card:hover {
 .project-card__inline-link {
   font-size: 0.88rem;
   font-weight: 600;
-  color: #34d399 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   margin-top: 0 !important;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
 }
 
 .project-card__inline-link:hover {
-  color: #6ee7b7 !important;
+  color: #ffffff !important;
   transform: translateX(3px);
   text-decoration: underline;
+  opacity: 1;
+}
+
+html[data-theme="light"] .project-card__inline-link {
+  color: #0f172a !important;
 }
 
 .project-group--dev .project-card .project-note {

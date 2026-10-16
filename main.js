@@ -205,6 +205,9 @@
       );
       glassElements.forEach(function (el) {
         var rect = null;
+        var rafId = null;
+        var nextX = 0;
+        var nextY = 0;
 
         el.addEventListener(
           'mouseenter',
@@ -220,10 +223,16 @@
             if (!rect) {
               rect = el.getBoundingClientRect();
             }
-            var x = e.clientX - rect.left;
-            var y = e.clientY - rect.top;
-            el.style.setProperty('--pointer-x', x + 'px');
-            el.style.setProperty('--pointer-y', y + 'px');
+            nextX = e.clientX - rect.left;
+            nextY = e.clientY - rect.top;
+
+            if (!rafId) {
+              rafId = requestAnimationFrame(function () {
+                el.style.setProperty('--pointer-x', nextX + 'px');
+                el.style.setProperty('--pointer-y', nextY + 'px');
+                rafId = null;
+              });
+            }
           },
           { passive: true }
         );
@@ -232,6 +241,10 @@
           'mouseleave',
           function () {
             rect = null;
+            if (rafId) {
+              cancelAnimationFrame(rafId);
+              rafId = null;
+            }
           },
           { passive: true }
         );
@@ -255,7 +268,8 @@
         });
       },
       {
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: '40px'
       }
     );
 
