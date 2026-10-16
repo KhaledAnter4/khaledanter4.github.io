@@ -170,7 +170,7 @@
         currentX += (mouseX - currentX) * 0.12;
         currentY += (mouseY - currentY) * 0.12;
 
-        light.style.transform = 'translate3d(' + (currentX - 275) + 'px, ' + (currentY - 275) + 'px, 0)';
+        light.style.transform = 'translate3d(' + (currentX - 150) + 'px, ' + (currentY - 150) + 'px, 0)';
 
         if (Math.abs(mouseX - currentX) > 0.5 || Math.abs(mouseY - currentY) > 0.5) {
           requestAnimationFrame(updateLight);
@@ -185,7 +185,7 @@
           mouseX = e.clientX;
           mouseY = e.clientY;
 
-          light.style.opacity = '0.85';
+          light.style.opacity = '0.55';
           clearTimeout(fadeTimer);
           fadeTimer = setTimeout(function () {
             light.style.opacity = '0';

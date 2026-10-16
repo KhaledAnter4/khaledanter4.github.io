@@ -182,13 +182,13 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 550px;
-  height: 550px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(circle, color-mix(in srgb, var(--accent-primary) 14%, transparent) 0%, color-mix(in srgb, var(--accent-secondary) 6%, transparent) 45%, transparent 70%);
-  filter: blur(45px);
+  filter: blur(35px);
   opacity: 0;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
@@ -857,6 +857,8 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
 }
 
 .cv-card {
+  max-width: 680px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1234,15 +1236,14 @@ html[data-theme="light"] body[data-page="projects"] .project-card:hover {
     0 10px 32px -6px rgba(15, 23, 42, 0.08);
 }
 
-/* Orynt Hover State — Rich Luxurious Deep Dark Green */
+/* Orynt Hover State — Understated Luxurious Dark Green (Not glowing, deep dark tone) */
 body[data-page="projects"] .project-card--orynt:hover {
   transform: translateY(-3px);
-  border-color: rgba(5, 150, 105, 0.55);
+  border-color: rgba(4, 120, 87, 0.45);
   box-shadow:
     var(--glass-highlight),
     var(--glass-shadow-hover),
-    0 10px 34px -6px rgba(4, 120, 87, 0.38),
-    0 0 60px -12px rgba(6, 95, 70, 0.28);
+    0 8px 24px -4px rgba(6, 78, 59, 0.35);
 }
 
 /* Compact Development Cards */
@@ -1271,18 +1272,13 @@ body[data-page="projects"] .project-card--orynt:hover {
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform var(--transition-fast);
 }
 
 .project-card:hover .project-card__logo {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.project-card--orynt:hover .project-card__logo {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.6), 0 0 12px rgba(4, 120, 87, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .project-card__header h3 {
