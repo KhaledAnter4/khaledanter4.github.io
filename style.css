@@ -1192,17 +1192,11 @@ body[data-page="projects"] .project-card p {
 
 body[data-page="projects"] .project-card .project-note {
   font-size: 0.86rem;
-  font-weight: 550;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+  color: var(--accent-primary);
   margin-top: 0.15rem;
   margin-bottom: 0.65rem;
   letter-spacing: 0.01em;
-}
-
-html[data-theme="light"] body[data-page="projects"] .project-card .project-note {
-  color: #334155;
-  text-shadow: none;
 }
 
 body[data-page="projects"] .project-card a {
