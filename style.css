@@ -1093,34 +1093,36 @@ html[data-theme="dark"] .contact-tile--github { --tile-accent: #cbd5e1; }
    Featured Project Card — Projects Page (Orynt)
    ========================================================= */
 
-/* Orynt brand tokens — verified from live application design system (hsl(168, 100%, 36%) / #00B893) */
+/* Orynt brand & luxury accents */
 :root {
-  --orynt-accent:      #008066;
-  --orynt-accent-dim:  rgba(0, 184, 147, 0.08);
-  --orynt-bg:          #09090b;
-  --orynt-surface:     #0e1218;
-  --orynt-border:      rgba(255, 255, 255, 0.08);
+  --orynt-green-dark:   #047857;
+  --orynt-green-deep:   #065f46;
+  --orynt-green-vivid:  #059669;
+  --orynt-green-glow:   rgba(4, 120, 87, 0.35);
+  --orynt-bg:           #080c12;
+  --orynt-border:       rgba(255, 255, 255, 0.08);
 }
 
-html[data-theme="dark"] {
-  --orynt-accent:      #00b893;
-  --orynt-accent-dim:  rgba(0, 184, 147, 0.12);
-  --orynt-bg:          #07090e;
-  --orynt-surface:     #0e1218;
-  --orynt-border:      rgba(255, 255, 255, 0.08);
-}
-
-/* Projects page ambient cursor spotlight — shifts to soft Orynt teal-green */
+/* Projects page ambient cursor spotlight — pure luxury soft white across the entire page */
 body[data-page="projects"] .ambient-light {
   background: radial-gradient(
     circle,
-    color-mix(in srgb, var(--orynt-accent) 14%, transparent) 0%,
-    color-mix(in srgb, var(--orynt-accent) 5%, transparent) 45%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.035) 45%,
     transparent 70%
   );
 }
 
-/* Soft ambient background glow behind featured project card */
+html[data-theme="light"] body[data-page="projects"] .ambient-light {
+  background: radial-gradient(
+    circle,
+    rgba(15, 23, 42, 0.05) 0%,
+    rgba(15, 23, 42, 0.015) 45%,
+    transparent 70%
+  );
+}
+
+/* Soft ambient white backdrop glow behind featured project card */
 .section--projects {
   position: relative;
 }
@@ -1135,7 +1137,7 @@ body[data-page="projects"] .ambient-light {
   transform: translate(-50%, -50%);
   background: radial-gradient(
     ellipse at center,
-    color-mix(in srgb, var(--orynt-accent) 7%, transparent) 0%,
+    rgba(255, 255, 255, 0.045) 0%,
     transparent 70%
   );
   pointer-events: none;
@@ -1144,7 +1146,15 @@ body[data-page="projects"] .ambient-light {
   opacity: 0.85;
 }
 
-/* Featured Project Card — compact 31% / 69% horizontal proportion on desktop */
+html[data-theme="light"] .section--projects::before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15, 23, 42, 0.03) 0%,
+    transparent 70%
+  );
+}
+
+/* Featured Project Card — Luxury Glassmorphic Architecture */
 .featured-project-card {
   position: relative;
   max-width: 1040px;
@@ -1163,16 +1173,18 @@ body[data-page="projects"] .ambient-light {
   z-index: 1;
 }
 
+/* Card Hover State — Rich Dark Green illumination */
 .featured-project-card:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--orynt-accent) 35%, var(--glass-border));
+  border-color: rgba(5, 150, 105, 0.48);
   box-shadow:
     var(--glass-highlight),
     var(--glass-shadow-hover),
-    0 0 32px -6px color-mix(in srgb, var(--orynt-accent) 22%, transparent);
+    0 0 36px -4px var(--orynt-green-glow),
+    0 0 75px -12px rgba(6, 95, 70, 0.24);
 }
 
-/* Pointer tracking glow — identical to Contact page tiles */
+/* Pointer tracking glow — activates rich dark green only when hovering on card */
 .featured-project__glow {
   position: absolute;
   top: var(--pointer-y, 50%);
@@ -1182,7 +1194,8 @@ body[data-page="projects"] .ambient-light {
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    color-mix(in srgb, var(--orynt-accent) 15%, transparent) 0%,
+    rgba(4, 120, 87, 0.32) 0%,
+    rgba(6, 95, 70, 0.16) 42%,
     transparent 70%
   );
   pointer-events: none;
@@ -1196,7 +1209,7 @@ body[data-page="projects"] .ambient-light {
   opacity: 1;
 }
 
-/* === Left Column — Compact Logo Panel (Near-square brand showcase) === */
+/* === Left Column — Compact Logo Panel === */
 .featured-project__visual {
   position: relative;
   overflow: hidden;
@@ -1210,10 +1223,20 @@ body[data-page="projects"] .ambient-light {
   min-height: 250px;
   background-image: radial-gradient(
     circle at 50% 50%,
-    var(--orynt-accent-dim) 0%,
+    rgba(255, 255, 255, 0.025) 0%,
     transparent 70%
   );
+  transition: background-image 0.4s ease, border-color var(--transition-smooth);
   z-index: 2;
+}
+
+.featured-project-card:hover .featured-project__visual {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(4, 120, 87, 0.24) 0%,
+    transparent 70%
+  );
+  border-right-color: rgba(5, 150, 105, 0.3);
 }
 
 /* Subtle scanlines texture overlay */
@@ -1231,26 +1254,39 @@ body[data-page="projects"] .ambient-light {
   z-index: 1;
 }
 
-/* Restrained corner bracket accents */
+/* Corner bracket accents — neutral silver in idle, dark green on hover */
 .fpv__corner {
   position: absolute;
   width: 14px;
   height: 14px;
-  opacity: 0.35;
+  opacity: 0.4;
+  border-color: rgba(255, 255, 255, 0.22);
   pointer-events: none;
+  transition: border-color var(--transition-normal), opacity var(--transition-normal);
   z-index: 2;
 }
+
 .fpv__corner--tl {
   top: 14px;
   left: 14px;
-  border-top: 1.5px solid var(--orynt-accent);
-  border-left: 1.5px solid var(--orynt-accent);
+  border-top-width: 1.5px;
+  border-top-style: solid;
+  border-left-width: 1.5px;
+  border-left-style: solid;
 }
+
 .fpv__corner--br {
   bottom: 14px;
   right: 14px;
-  border-bottom: 1.5px solid var(--orynt-accent);
-  border-right: 1.5px solid var(--orynt-accent);
+  border-bottom-width: 1.5px;
+  border-bottom-style: solid;
+  border-right-width: 1.5px;
+  border-right-style: solid;
+}
+
+.featured-project-card:hover .fpv__corner {
+  border-color: var(--orynt-green-vivid);
+  opacity: 0.85;
 }
 
 /* Logo + wordmark group */
@@ -1271,24 +1307,30 @@ body[data-page="projects"] .ambient-light {
   border-radius: 14px;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 20px -4px color-mix(in srgb, var(--orynt-accent) 22%, transparent);
+    0 0 16px -4px rgba(255, 255, 255, 0.06);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .featured-project-card:hover .fpv__logo {
   transform: scale(1.04);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.12),
-    0 0 28px -2px color-mix(in srgb, var(--orynt-accent) 35%, transparent);
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 0 30px -3px var(--orynt-green-glow);
 }
 
 .fpv__logo-name {
   font-size: 0.72rem;
   font-weight: 650;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--orynt-accent);
-  opacity: 0.75;
+  color: var(--text-muted);
+  opacity: 0.8;
+  transition: color var(--transition-normal), opacity var(--transition-normal);
+}
+
+.featured-project-card:hover .fpv__logo-name {
+  color: #34d399;
+  opacity: 0.95;
 }
 
 /* === Right Column — Project Information (approx. 69% width) === */
@@ -1301,31 +1343,46 @@ body[data-page="projects"] .ambient-light {
   justify-content: center;
 }
 
-.featured-label {
+/* Luxury Pill Badge */
+.featured-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
+  padding: 0.32rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--orynt-accent);
-  margin-bottom: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.95rem;
+  width: fit-content;
+  transition: border-color var(--transition-normal), color var(--transition-normal), background-color var(--transition-normal);
 }
 
-.featured-label::before {
-  content: "";
-  display: block;
-  width: 14px;
-  height: 1.5px;
-  border-radius: 2px;
-  background: currentColor;
-  flex-shrink: 0;
-  opacity: 0.75;
+.featured-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.featured-project-card:hover .featured-badge {
+  border-color: rgba(5, 150, 105, 0.45);
+  background-color: rgba(4, 120, 87, 0.12);
+  color: #a7f3d0;
+}
+
+.featured-project-card:hover .featured-badge__dot {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
 }
 
 .featured-project__headline {
-  font-size: clamp(1.5rem, 2.5vw, 1.95rem);
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
   font-weight: 750;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -1336,9 +1393,44 @@ body[data-page="projects"] .ambient-light {
 .featured-project__desc {
   font-size: 0.96rem;
   color: var(--text-muted);
-  line-height: 1.68;
-  margin: 0 0 1.65rem;
+  line-height: 1.7;
+  margin: 0 0 1.35rem;
   max-width: 38rem;
+}
+
+/* Feature tags */
+.featured-project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.75rem;
+}
+
+.fp-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 550;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.32rem 0.8rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.01em;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.featured-project-card:hover .fp-tag {
+  border-color: rgba(5, 150, 105, 0.28);
+  background-color: rgba(4, 120, 87, 0.08);
+  color: #e2e8f0;
+}
+
+.fp-tag:hover {
+  border-color: rgba(5, 150, 105, 0.55) !important;
+  background-color: rgba(4, 120, 87, 0.18) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
 }
 
 .featured-project__actions {
