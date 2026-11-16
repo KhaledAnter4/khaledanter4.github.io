@@ -1,6 +1,6 @@
 # Khaled Anter
 
-### Software Tester | QA Engineer | Cybersecurity
+### Software Tester | Web Penetration Tester
 
 I am a Software Tester with a strong technical background in web application security and software development. I focus on identifying defects, validating application behavior, testing business logic, and ensuring reliable user experiences through structured and risk-based testing.
 
